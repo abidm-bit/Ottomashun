@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -105,7 +106,7 @@ public class Base {
         driver.close();
     }
 
-    //iframes , overloading
+    // iframes , overloading
     void handleiFrame(String identifier){
         driver.switchTo().frame(identifier);
     }
@@ -116,12 +117,25 @@ public class Base {
         driver.switchTo().frame(element);
     }
 
-
+    // switchBack after interacting with an iframe
     void switchBack(){
         driver.switchTo().defaultContent();
     }
 
-
     //dropdown : Select class
+    void handleDropDown(WebElement element, int index){
+        Select select = new Select(element);
+        select.selectByIndex(index);
+    }
+    void handleDropDownV(WebElement element, String value){
+        Select select = new Select(element);
+        select.selectByValue(value);
+    }
+    void handleDropDownVT(WebElement element, String visibleText){
+        Select select = new Select(element);
+        select.selectByVisibleText(visibleText);
+    }
+
+
     // screenshot for a confirmation
 }
