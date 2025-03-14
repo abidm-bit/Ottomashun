@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.Set;
 
 public class Base {
     static WebDriver driver;
@@ -39,11 +40,10 @@ public class Base {
         actions.moveToElement(element).perform();
     }
 
-    // this mimics scrolling to an element (Chrome)
-    // won't bring the element into the top view, scrolls just enough
-    void scroll2Element(WebElement element){
-        Actions actions  = new Actions(driver);
-        actions.scrollToElement(element).perform();
+    // doubleClick
+    void doubleClicc(WebElement element){
+        Actions actions = new Actions(driver);
+        actions.doubleClick(element);
     }
 
     // drag and drop: dragSource + dropTarget
@@ -52,10 +52,11 @@ public class Base {
         actions.dragAndDrop(source,target).perform();
     }
 
-    // doubleClick
-    void doubleClicc(WebElement element){
-        Actions actions = new Actions(driver);
-        actions.doubleClick(element);
+    // this mimics scrolling to an element (Chrome)
+    // won't bring the element into the top view, scrolls just enough
+    void scroll2Element(WebElement element){
+        Actions actions  = new Actions(driver);
+        actions.scrollToElement(element).perform();
     }
 
     // JavaScript workaround for other browsers to scroll to an element
@@ -91,16 +92,36 @@ public class Base {
         return alert.getText();
     }
 
+    void handleTabWindow(String startingHandle){
+        Set<String> allHandles = driver.getWindowHandles();
+        for(String aH: allHandles){
+            if(aH != startingHandle){
+                driver.switchTo().window(aH);
+            }
+        }
+    }
+
+    void closeWindow(){
+        driver.close();
+    }
+
+    //iframes , overloading
+    void handleiFrame(String identifier){
+        driver.switchTo().frame(identifier);
+    }
+    void handleiFrame(int index){
+        driver.switchTo().frame(index);
+    }
+    void handleiFrame(WebElement element){
+        driver.switchTo().frame(element);
+    }
+
+
     void switchBack(){
         driver.switchTo().defaultContent();
     }
 
 
-    // screenshot for a confirmation
-
-    //iframes
-
     //dropdown : Select class
-
-
+    // screenshot for a confirmation
 }

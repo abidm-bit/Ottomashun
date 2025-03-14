@@ -51,10 +51,6 @@ public class TAPTests extends Base{
         //working on the assertion step, but the double click method works
     }
 
-    @AfterMethod
-    void perMethod(){
-        driver.close();
-    }
 
     @AfterClass
     void tearDown(){
