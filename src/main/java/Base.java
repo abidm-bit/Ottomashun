@@ -16,11 +16,15 @@ public class Base {
 
     void getSite(String url){
         driver=new ChromeDriver();
+        driver.manage().deleteAllCookies();
+        driver.manage().window().maximize();
         driver.get(url);
     }
 
     void navToSite(String url){
         driver = new ChromeDriver();
+        driver.manage().deleteAllCookies();
+        driver.manage().window().maximize();
         driver.navigate().to(url);
     }
 
@@ -39,12 +43,6 @@ public class Base {
     void move2Element(WebElement element){
         Actions actions = new Actions(driver);
         actions.moveToElement(element).perform();
-    }
-
-    // doubleClick
-    void doubleClicc(WebElement element){
-        Actions actions = new Actions(driver);
-        actions.doubleClick(element);
     }
 
     // drag and drop: dragSource + dropTarget
@@ -137,5 +135,5 @@ public class Base {
     }
 
 
-    // screenshot for a confirmation
+
 }
