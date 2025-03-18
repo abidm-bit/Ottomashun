@@ -15,15 +15,19 @@ eBay eb;
         eb= PageFactory.initElements(driver,eBay.class);
     }
 
-    @Test(priority = 0)
+    @Test()
     void scrapeFooter(){
         eb.cleanDB(); // delete previously scraped links
         eb.scrapeCallus();
     }
 
+    @Test
+    void indecisiveWorkflow(){
+        eb.indecisive(); // book? ipod? no - Macgyver dvd set xD
+    }
 
 
-    @AfterMethod
+    @AfterMethod()
     void tearDown(){
         driver.quit();
     }
