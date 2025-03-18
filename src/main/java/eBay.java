@@ -75,7 +75,7 @@ public class eBay extends Base {
 
     void cleanDB(){
         String query = "Delete from ebayFooterLinx";
-        try (Connection connection = DriverManager.getConnection("jdbc:sqlite:/Users/mabid/IdeaProjects/Ottomashun/src/main/resources/ebayFootScrape");
+    try (Connection connection = DriverManager.getConnection("jdbc:sqlite:src/main/resources/ebayFootScrape");
              PreparedStatement statement = connection.prepareStatement(query)) {
             connection.setAutoCommit(false); // Start transaction
             statement.executeUpdate();
