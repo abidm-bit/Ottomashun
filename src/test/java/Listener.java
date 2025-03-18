@@ -26,8 +26,9 @@ public class Listener implements ITestListener{
         try {
             FileUtils.copyFile(file, new File("src/test/java/screenshots/failedTests" + name +".png"));
         } catch (IOException e) {
-            System.out.println("Test failed");
+
         }
+        System.out.println("Test failed");
     }
 
     @Override

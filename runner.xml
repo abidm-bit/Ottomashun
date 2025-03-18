@@ -11,6 +11,7 @@
             <class name="GoogleHPTest"/>
             <class name="TAPTests"/>
             <class name="eBayTests"/>
+            <class name="CostcoHolidayGiftsTest"/>
         </classes>
     </test>
 
