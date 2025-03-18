@@ -19,14 +19,14 @@ public class Listener extends Base implements ITestListener{
 
     @Override
     public void onTestFailure(ITestResult result) {
-        System.out.println("Test failed");
-        DateFormat dateFormat = new SimpleDateFormat("MMM/dd/yyyy/hh:mm aaa");
-        Date date = new Date();
-        String name = dateFormat.format(date);
-        File file = ((TakesScreenshot) Base.driver).getScreenshotAs(OutputType.FILE);
         try {
+            DateFormat dateFormat = new SimpleDateFormat("MMM/dd/yyyy/hh:mm aaa");
+            Date date = new Date();
+            String name = dateFormat.format(date);
+            File file = ((TakesScreenshot) Base.driver).getScreenshotAs(OutputType.FILE);
             FileUtils.copyFile(file, new File("src/test/screenshots/failedTests/" + name +".png"));
         } catch (IOException e) {
+            System.out.println("Test failed");
         }
     }
 
