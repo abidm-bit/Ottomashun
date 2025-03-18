@@ -24,7 +24,7 @@ public class Listener implements ITestListener{
         String name = dateFormat.format(date);
         File file = ((TakesScreenshot) Base.driver).getScreenshotAs(OutputType.FILE);
         try {
-            FileUtils.copyFile(file, new File("src/test/screenshots/failedTests/" + name +".png"));
+            FileUtils.copyFile(file, new File("src/test/java/screenshots/failedTests" + name +".png"));
         } catch (IOException e) {
             System.out.println("Test failed");
         }
