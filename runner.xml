@@ -12,6 +12,7 @@
             <class name="TAPTests"/>
             <class name="eBayTests"/>
             <class name="CostcoHolidayGiftsTest"/>
+            <class name="DQAWindowTests"/>
         </classes>
     </test>
 

@@ -16,14 +16,14 @@ public class DQAWindowTests extends Base {
 
     @Test(priority = 0)
     void firstWindowButton(){
-dqawindows.firstWindowButton();
+    dqawindows.firstWindowButton();
     }
 
-    @Test(priority = 1)
+    @Test(priority = 1,enabled = false)
     void secondWindowButton1(){
 
     }
-    @Test(priority = 2)
+    @Test(priority = 2,enabled = false)
     void secondWindowButton2(){
 
     }
