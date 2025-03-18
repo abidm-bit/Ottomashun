@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.Set;
 
 public class Base {
@@ -134,6 +135,15 @@ public class Base {
         select.selectByVisibleText(visibleText);
     }
 
-
+    boolean checkIfPricesAreSorted(ArrayList<String> input){
+        ArrayList<Double>process = new ArrayList<>();
+        for(String all:input){
+            all=all.replaceAll("\\$","");
+            process.add(Double.parseDouble(all));
+        }
+        for(int i=1;i<process.size();i++){
+            if(process.get(i-1).compareTo(process.get(i))>0){ return false;}
+        }return true;
+    }
 
 }
