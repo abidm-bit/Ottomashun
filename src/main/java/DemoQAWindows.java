@@ -20,6 +20,9 @@ public class DemoQAWindows extends Base{
     @FindBy(xpath = "//*[@id='messageWindowButton']")
     WebElement secondWinButton;
 
+    @FindBy(tagName = "body") WebElement messageInWindow;
+    String expectedMessage= "Knowledge increases by sharing but not by saving. Please share this website with your friends and in your organization.";
+
     void deleteAnnoyingAds(){
         for(WebElement all:allFrames){
             deleteElement(all);
@@ -40,6 +43,14 @@ public class DemoQAWindows extends Base{
         Assert.assertEquals(driver.getCurrentUrl(),"https://demoqa.com/browser-windows");
     }
 
+    void secondWindowButtonTC1(){
+        deleteAnnoyingAds();
+        String starting = driver.getWindowHandle();
+        scroll2Element2(secondWinButton);
+        secondWinButton.click();
+        handleTabWindow(starting);
+        Assert.assertEquals(messageInWindow.getText(),expectedMessage);
+    }
 
 
 }

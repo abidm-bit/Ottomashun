@@ -21,8 +21,9 @@ public class DQAWindowTests extends Base {
 
     @Test(priority = 1,enabled = false)
     void secondWindowButton1(){
-
+        dqawindows.secondWindowButtonTC1();
     }
+
     @Test(priority = 2,enabled = false)
     void secondWindowButton2(){
 
