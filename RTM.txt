@@ -1,0 +1,20 @@
+Done:
+Tab Handling + Select dropdown(all 3 options) : eBay
+Scrape footerLinks (name + link) : eBay
+iFrame + Tab Handling + navigate.back : Google
+JavaScriptExecutor : delete an element : StackOverflow
+Actions : scrollToElement : TestAutomationPractice
+Actions : drag and drop : TestAutomationPractice
+Actions : moveToElement : TestAutomationPractice
+Alert : accept,dismiss,getText,sendKeys : TestAutomationPractice
+Actions : double click : TestAutomationPractice
+JavaScriptExecutor : scrollToElement : TestAutomationPractice
+
+
+
+
+To do:
+
+**failed tests not taking screenshots**
+ITestListener + Extent Reports> extent sparkreporter
+Maven build > package > Jenkins CICD pipeline
