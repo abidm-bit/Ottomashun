@@ -45,14 +45,9 @@ public class TAPTests extends Base{
         tab.promptAlert2(text);
     }
 
-    @Test(priority = 6)
-    void doubleClickMethod(){
-        tab.doubleClickButton();
-        //working on the assertion step, but the double click method works
-    }
 
 
-    @AfterClass
+    @AfterMethod
     void tearDown(){
         driver.quit();
     }

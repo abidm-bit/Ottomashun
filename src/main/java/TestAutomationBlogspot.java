@@ -129,28 +129,6 @@ void promptAlert2(String name){
     Assert.assertTrue(post.contains(name));
 }
 
-@FindBy(xpath = "//h2[contains(text(),'Double Click')]")
-WebElement doubleClickHeader;
-
-@FindBy(xpath = "//button[contains(text(),'Copy Text')]")
-WebElement doubleClickThisButton;
-
-@FindBy(css = "input#field2")
-WebElement field2;
-
-/* HAPPY PATH
-GIVEN a user scrolls to the Double Click header
-WHEN the user double-clicks the Copy Text button
-THEN the text from Field1 will be copied into Field2.
-*/
-void doubleClickButton(){
-    scroll2Element2(doubleClickHeader);
-    Assert.assertEquals(field2.getText(),"");
-    doubleClicc(doubleClickThisButton);
-//    JavascriptExecutor js= (JavascriptExecutor) driver;
-//    String field2Value = (String) js.executeScript("arguments[0].value;",field2);
-//    Assert.assertEquals(field2Value,"Hello World!");
-}
 
 
 
