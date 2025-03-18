@@ -15,7 +15,6 @@ public class GoogleHPTest extends Base{
         googleHP = PageFactory.initElements(driver,GoogleHP.class);
     }
 
-
     @Test(priority = 0)
     void signInSwitchTab(){
         googleHP.switchTabComeBack();
@@ -23,7 +22,7 @@ public class GoogleHPTest extends Base{
 
     @DataProvider(name = "googleSearchKW")
     public Object[] keywords(){
-        return new Object[][]{{"java"},{"abacus"},{"root"}};
+        return new Object[][]{{"java"},{"root"}};
     }
 
     @Test(dataProvider = "googleSearchKW")

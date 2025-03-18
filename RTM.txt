@@ -14,7 +14,5 @@ JavaScriptExecutor : scrollToElement : TestAutomationPractice
 
 
 To do:
-
-**failed tests not taking screenshots**
 ITestListener + Extent Reports> extent sparkreporter
 Maven build > package > Jenkins CICD pipeline
