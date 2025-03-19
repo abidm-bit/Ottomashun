@@ -47,7 +47,7 @@ public class CostcoHolidayGifts extends Base{
     */
     void sortNegativeTC(){
         impWait(5);
-        handleDropDown(sortBy,2);
+        handleDropDown(sortBy,1);
         ArrayList<String> process = new ArrayList<>();
         for(WebElement all:prices){
             process.add(all.getText());
