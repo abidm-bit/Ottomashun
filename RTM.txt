@@ -10,9 +10,4 @@ Alert : accept,dismiss,getText,sendKeys : TestAutomationPractice
 Actions : double click : TestAutomationPractice
 JavaScriptExecutor : scrollToElement : TestAutomationPractice
 
-
-
-
-To do:
-ITestListener + Extent Reports> extent sparkreporter
-Maven build > package > Jenkins CICD pipeline
+ITestListener + Extent Reports

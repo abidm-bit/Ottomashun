@@ -41,7 +41,6 @@ public class Listener implements ITestListener{
         } catch (IOException e) {
 
         }
-//       getTest(result).fail(result.getThrowable());
         getTest(result).fail("Test failed due to: " + result.getThrowable().getMessage());
         extent.flush();
     }
