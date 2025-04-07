@@ -1,6 +1,7 @@
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 
+// singleton class eg. test report, db connection
 public class ExtentManager {
 
     private static ExtentReports extent;
