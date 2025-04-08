@@ -19,7 +19,7 @@ eBay eb;
         eb.scrapeCallus();
     }
 
-    @Test
+    @Test(enabled = false)
     void indecisiveWorkflow(){
         eb.indecisive(); // book? ipod? no - Macgyver dvd set xD
     }

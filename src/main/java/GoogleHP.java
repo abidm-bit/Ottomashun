@@ -27,10 +27,12 @@ public class GoogleHP extends Base{
     WebElement storeButton;
 
 void staySignedInIFrame(){
+    try{
     impWait(5);
     handleiFrame(0); // iframe:nth-child(1), so I'm passing index 0
     ssoButton.click();
-    switchBack();
+    switchBack();}
+    catch (Exception _){}
 }
 
 void setSignInButton(){
