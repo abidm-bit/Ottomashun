@@ -12,6 +12,7 @@
         <maven.compiler.source>23</maven.compiler.source>
         <maven.compiler.target>23</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <testng.version>7.11.0</testng.version>
     </properties>
     <build>
         <plugins>
@@ -20,6 +21,9 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.5.2</version>
                 <configuration>
+                    <suiteXmlFiles>
+                       <suiteXmlFile> runner.xml</suiteXmlFile>
+                    </suiteXmlFiles>
                     <systemPropertyVariables>
                         <extent.reporter.spark.start>true</extent.reporter.spark.start>
                         <extent.reporter.spark.out>target/extent-reports/report.html</extent.reporter.spark.out>
