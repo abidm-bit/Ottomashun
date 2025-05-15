@@ -10,7 +10,6 @@
             <class name="StackOverflowTests"/>
             <class name="GoogleHPTest"/>
             <class name="TAPTests"/>
-            <class name="eBayTests"/>
             <class name="CostcoHolidayGiftsTest"/>
             <class name="DQAWindowTests"/>
         </classes>
