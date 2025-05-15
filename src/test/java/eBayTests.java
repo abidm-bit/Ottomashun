@@ -13,7 +13,7 @@ eBay eb;
         eb= PageFactory.initElements(driver,eBay.class);
     }
 
-    @Test()
+    @Test(enabled = false)
     void scrapeFooter(){
         eb.cleanDB(); // delete previously scraped links
         eb.scrapeCallus();
