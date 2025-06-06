@@ -1,18 +1,43 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
-<suite name="Suite1" verbose="1" >
+<suite name="Ottomashun Test Suite" verbose="1" parallel="classes" thread-count="3">
+    <!-- Configure listeners -->
     <listeners>
-        <listener class-name="Listener">
-        </listener>
+        <listener class-name="Listener"/>
     </listeners>
-    <test name="Regression">
+
+    <!-- Test Parameters -->
+    <parameter name="browser" value="chrome"/>
+    <parameter name="implicitWait" value="10"/>
+
+    <!-- UI Tests -->
+    <test name="UI Automation Tests">
         <classes>
-            <class name="StackOverflowTests"/>
-            <class name="GoogleHPTest"/>
-            <class name="TAPTests"/>
-            <class name="CostcoHolidayGiftsTest"/>
-            <class name="DQAWindowTests"/>
+            <class name="StackOverflowTests">
+                <methods>
+                    <include name=".*"/>
+                </methods>
+            </class>
+            <class name="GoogleHPTest">
+                <methods>
+                    <include name=".*"/>
+                </methods>
+            </class>
+            <class name="TAPTests">
+                <methods>
+                    <include name=".*"/>
+                </methods>
+            </class>
+            <class name="CostcoHolidayGiftsTest">
+                <methods>
+                    <include name=".*"/>
+                </methods>
+            </class>
+            <class name="DQAWindowTests">
+                <methods>
+                    <include name=".*"/>
+                </methods>
+            </class>
         </classes>
     </test>
-
 </suite>

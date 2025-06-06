@@ -1,75 +1,108 @@
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
-
+import java.util.List;
 import java.util.Objects;
 
-public class GoogleHP extends Base{
-
-
+public class GoogleHP extends Base {
     @FindBy(css = "[aria-label='Search']")
-    WebElement searchboxinput;
+    private WebElement searchboxinput;
 
     @FindBy(xpath = "//button[contains(text(),'Stay signed out')]")
-    WebElement ssoButton;
+    private WebElement ssoButton;
 
-    @FindBy(css = "a[aria-label='Sign in (opens a new tab)']")
-    WebElement signInButton;
+    @FindBy(xpath = "(//span[contains(text(),'Sign in')])[3]")
+    private WebElement signInButton;
 
     @FindBy(xpath = "//span[contains(text(),'Sign in')]")
-    WebElement headerSI;
+    private WebElement headerSI;
 
     @FindBy(xpath = "//a[contains(text(),' How Search works ')]")
-    WebElement hsw;
+    private WebElement hsw;
 
     @FindBy(xpath = "//a[contains(text(),'Store')]")
-    WebElement storeButton;
+    private WebElement storeButton;
 
-void staySignedInIFrame(){
-    try{
-    impWait(5);
-    handleiFrame(0); // iframe:nth-child(1), so I'm passing index 0
-    ssoButton.click();
-    switchBack();}
-    catch (Exception _){}
-}
+    @FindBy(tagName = "iframe")
+    private List<WebElement> allIframes;
 
-void setSignInButton(){
-    String startingHandle = driver.getWindowHandle();
-    impWait(5);
-    handleiFrame("callout"); // it can be identified by the name "callout"
-    signInButton.click(); // switches to a new tab
-    handleTabWindow(startingHandle); // switches to that new tab
-    impWait(5);
-    Assert.assertTrue(headerSI.isDisplayed());
-    String secondHandle= driver.getWindowHandle();
-    driver.close();
-    handleTabWindow(secondHandle);
-    impWait(5);
-    Assert.assertEquals(driver.getCurrentUrl(),"https://www.google.com/");
-}
+    public GoogleHP(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+    }
 
+    public void staySignedInIFrame() {
+        try {
+            impWait(5);
+            handleiFrame(0);
+            ssoButton.click();
+            switchBack();
+        } catch (Exception _) {}
+    }
 
-void searchBox(String input){
-    staySignedInIFrame();
-    searchboxinput.sendKeys(input, Keys.ENTER);
-    impWait(5);
-    Assert.assertTrue(Objects.requireNonNull(driver.getCurrentUrl()).contains(input));
-}
+    public void setSignInButton() {
+        try {
+            String startingHandle = driver.getWindowHandle();
+            impWait(5);
 
-void switchTabComeBack(){
-    setSignInButton();
-    Assert.assertTrue(hsw.isDisplayed());
-    hsw.click();
-    Assert.assertEquals(driver.getCurrentUrl(),"https://www.google.com/search/howsearchworks/?fg=1");
-    driver.navigate().back();
-    impWait(3);
-    Assert.assertTrue(storeButton.isDisplayed());
-    storeButton.click();
-    impWait(3);
-    Assert.assertTrue(Objects.requireNonNull(driver.getCurrentUrl()).contains("store.google.com"));
-}
+            // Try to find the sign in button directly first
+            if (signInButton.isDisplayed()) {
+                signInButton.click();
+            } else {
+                // If not found, try each iframe until we find it
+                boolean found = false;
+                for (int i = 0; i < allIframes.size() && !found; i++) {
+                    try {
+                        handleiFrame(i);
+                        if (signInButton.isDisplayed()) {
+                            signInButton.click();
+                            found = true;
+                        }
+                    } catch (Exception e) {
+                        // If element not found in this iframe, continue to next
+                        switchBack();
+                    }
+                }
+                
+                if (!found) {
+                    throw new RuntimeException("Sign in button not found in any iframe");
+                }
+            }
 
+            handleTabWindow(startingHandle);
+            impWait(5);
+            Assert.assertTrue(headerSI.isDisplayed());
+            String secondHandle = driver.getWindowHandle();
+            driver.close();
+            handleTabWindow(secondHandle);
+            impWait(5);
+            Assert.assertEquals(driver.getCurrentUrl(), "https://www.google.com/");
+        } catch (Exception e) {
+            System.out.println("Error in setSignInButton: " + e.getMessage());
+            throw e;
+        }
+    }
 
+    public void searchBox(String input) {
+        staySignedInIFrame();
+        searchboxinput.sendKeys(input, Keys.ENTER);
+        impWait(5);
+        Assert.assertTrue(Objects.requireNonNull(driver.getCurrentUrl()).contains(input));
+    }
+
+    void switchTabComeBack(){
+        setSignInButton();
+        Assert.assertTrue(hsw.isDisplayed());
+        hsw.click();
+        Assert.assertEquals(driver.getCurrentUrl(),"https://www.google.com/search/howsearchworks/?fg=1");
+        driver.navigate().back();
+        impWait(3);
+        Assert.assertTrue(storeButton.isDisplayed());
+        storeButton.click();
+        impWait(3);
+        Assert.assertTrue(Objects.requireNonNull(driver.getCurrentUrl()).contains("store.google.com"));
+    }
 }
