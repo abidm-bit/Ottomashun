@@ -1,38 +1,22 @@
-import org.openqa.selenium.support.PageFactory;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class DQAWindowTests extends Base {
-    DemoQAWindows dqawindows;
-
+public class DQAWindowTests extends TestBase {
+    private DemoQAWindows demoQAWindows;
 
     @BeforeMethod
-    void invokeBrowser(){
-        getSite("https://demoqa.com/browser-windows");
-        dqawindows= PageFactory.initElements(driver,DemoQAWindows.class);
+    void setupTest() {
+        driver.get("https://demoqa.com/browser-windows");
+        demoQAWindows = new DemoQAWindows(driver);
     }
 
     @Test(priority = 0)
-    void firstWindowButton(){
-    dqawindows.firstWindowButton();
+    void firstWindowButton() {
+        demoQAWindows.firstWindowButton();
     }
 
-    @Test(priority = 1,enabled = false)
-    void secondWindowButton1(){
-        dqawindows.secondWindowButtonTC1();
+    @Test(priority = 1)
+    void secondWindowButton() {
+        demoQAWindows.secondWindowButtonTC1();
     }
-
-    @Test(priority = 2,enabled = false)
-    void secondWindowButton2(){
-
-    }
-
-    @AfterMethod
-    void tearDown(){
-        driver.quit();
-    }
-
-
-
 }

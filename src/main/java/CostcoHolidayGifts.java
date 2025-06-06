@@ -1,19 +1,24 @@
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CostcoHolidayGifts extends Base{
+public class CostcoHolidayGifts extends Base {
 
-    // dropdown
     @FindBy(css = "select#sort_by")
-    WebElement sortBy;
+    private WebElement sortBy;
 
-    // locator for prices
-    @FindBy(css= ".product-tile-set .thumbnail .price")
-    List<WebElement> prices;
+    @FindBy(css = ".product-tile-set .thumbnail .price")
+    private List<WebElement> prices;
+
+    public CostcoHolidayGifts(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+    }
 
     /*
     Happy Path test case
@@ -25,11 +30,11 @@ public class CostcoHolidayGifts extends Base{
     6. AssertTrue: Use the checkSorted method
 
     */
-    void sortHappyPath(){
+    public void sortHappyPath() {
         impWait(5);
-        handleDropDown(sortBy,2);
+        handleDropDown(sortBy, 2);
         ArrayList<String> process = new ArrayList<>();
-        for(WebElement all:prices){
+        for (WebElement all : prices) {
             process.add(all.getText());
         }
         Assert.assertTrue(checkIfPricesAreSorted(process));
@@ -45,11 +50,11 @@ public class CostcoHolidayGifts extends Base{
     5. loop thru prices, .getTexT() & add it to a ArrayList<String> prices
     6. AssertFalse: Use the checkSorted method
     */
-    void sortNegativeTC(){
+    public void sortNegativeTC() {
         impWait(5);
-        handleDropDown(sortBy,1);
+        handleDropDown(sortBy, 1);
         ArrayList<String> process = new ArrayList<>();
-        for(WebElement all:prices){
+        for (WebElement all : prices) {
             process.add(all.getText());
         }
         Assert.assertFalse(checkIfPricesAreSorted(process));

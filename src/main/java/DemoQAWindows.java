@@ -1,56 +1,60 @@
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
 import java.util.List;
 
-
-public class DemoQAWindows extends Base{
-
-
+public class DemoQAWindows extends Base {
     @FindBy(tagName = "iframe")
-    List<WebElement> allFrames;
+    private List<WebElement> allFrames;
 
     @FindBy(xpath = "//*[@id='windowButton']")
-    WebElement firstWinButton;
+    private WebElement firstWinButton;
 
-    @FindBy(id="sampleHeading")
-    WebElement firstWindowContent;
+    @FindBy(id = "sampleHeading")
+    private WebElement firstWindowContent;
 
     @FindBy(xpath = "//*[@id='messageWindowButton']")
-    WebElement secondWinButton;
+    private WebElement secondWinButton;
 
-    @FindBy(tagName = "body") WebElement messageInWindow;
-    String expectedMessage= "Knowledge increases by sharing but not by saving. Please share this website with your friends and in your organization.";
+    @FindBy(tagName = "body")
+    private WebElement messageInWindow;
 
-    void deleteAnnoyingAds(){
-        for(WebElement all:allFrames){
+    private final String expectedMessage = "Knowledge increases by sharing but not by saving. Please share this website with your friends and in your organization.";
+
+    public DemoQAWindows(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+    }
+
+    public void deleteAnnoyingAds() {
+        for (WebElement all : allFrames) {
             deleteElement(all);
         }
     }
 
-    void firstWindowButton(){
+    public void firstWindowButton() {
         impWait(3);
         deleteAnnoyingAds();
         String startingWindow = driver.getWindowHandle();
         firstWinButton.click();
         handleTabWindow(startingWindow);
-        Assert.assertEquals(driver.getCurrentUrl(),"https://demoqa.com/sample");
+        Assert.assertEquals(driver.getCurrentUrl(), "https://demoqa.com/sample");
         String secondWindow = driver.getWindowHandle();
-        Assert.assertEquals(firstWindowContent.getText(),"This is a sample page");
+        Assert.assertEquals(firstWindowContent.getText(), "This is a sample page");
         driver.close();
         handleTabWindow(secondWindow);
-        Assert.assertEquals(driver.getCurrentUrl(),"https://demoqa.com/browser-windows");
+        Assert.assertEquals(driver.getCurrentUrl(), "https://demoqa.com/browser-windows");
     }
 
-    void secondWindowButtonTC1(){
+    public void secondWindowButtonTC1() {
         deleteAnnoyingAds();
         String starting = driver.getWindowHandle();
         scroll2Element2(secondWinButton);
         secondWinButton.click();
         handleTabWindow(starting);
-        Assert.assertEquals(messageInWindow.getText(),expectedMessage);
+        Assert.assertEquals(messageInWindow.getText(), expectedMessage);
     }
-
-
 }
