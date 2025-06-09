@@ -1,39 +1,31 @@
-import org.openqa.selenium.support.PageFactory;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class GoogleHPTest extends Base{
-
-    GoogleHP googleHP;
-
+public class GoogleHPTest extends TestBase {
+    private GoogleHP googleHP;
 
     @BeforeMethod
-    void invokeBrowser(){
-        navToSite("https://www.google.com/");
-        googleHP = PageFactory.initElements(driver,GoogleHP.class);
+    void setupTest() {
+        driver.get("https://www.google.com");
+        googleHP = new GoogleHP(driver);
     }
 
-    @Test(priority = 0)
-    void signInSwitchTab(){
-        googleHP.switchTabComeBack();
+    @DataProvider(name = "searchTerms")
+    public Object[][] searchData() {
+        return new Object[][] {
+            {"selenium"},
+            {"testng"}
+        };
     }
 
-    @DataProvider(name = "googleSearchKW")
-    public Object[] keywords(){
-        return new Object[][]{{"java"},{"root"}};
+    @Test(dataProvider = "searchTerms")
+    void searchTest(String searchTerm) {
+        googleHP.searchBox(searchTerm);
     }
 
-    @Test(dataProvider = "googleSearchKW")
-    void search(String inp){
-        googleHP.searchBox(inp);
+    @Test(enabled=false)
+    void signInTest() {
+        googleHP.setSignInButton();
     }
-
-    @AfterMethod
-    void tearDown(){
-        driver.quit();
-    }
-
-
 }
